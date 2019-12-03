@@ -133,7 +133,7 @@ var readability = {
         /* Glue the structure of our document together. */
         innerDiv.appendChild( articleTitle   );
         innerDiv.appendChild( articleContent );
-        innerDiv.appendChild( articleFooter  );
+        // innerDiv.appendChild( articleFooter  );
          //overlay.appendChild( articleTools   );
          overlay.appendChild( innerDiv       );
 
