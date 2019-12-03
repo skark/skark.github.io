@@ -661,7 +661,6 @@ var readability = {
             NProgress.start();
             window.setTimeout(function() {
                 readability.appendNextPage(nextPageLink);
-                NProgress.done();
             }, 500);
         }
 
@@ -1979,6 +1978,9 @@ var readability = {
 
                     if(nextPageLink) {
                         readability.appendNextPage(nextPageLink);
+                    }
+                    else {
+                    	NProgress.done();
                     }
                 }
             });
