@@ -134,7 +134,7 @@ var readability = {
         innerDiv.appendChild( articleTitle   );
         innerDiv.appendChild( articleContent );
         innerDiv.appendChild( articleFooter  );
-         overlay.appendChild( articleTools   );
+         //overlay.appendChild( articleTools   );
          overlay.appendChild( innerDiv       );
 
         /* Clear the old HTML, insert the new content. */
