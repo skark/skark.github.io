@@ -549,6 +549,7 @@ var readability = {
         var rdbTKScript  = document.createElement('script');
         var rdbTKCode    = null;
 
+	/*
         var rdbTKLink    = document.createElement('a');
             rdbTKLink.setAttribute('class','rdbTK-powered');
             rdbTKLink.setAttribute('title','Fonts by Typekit');
@@ -570,6 +571,7 @@ var readability = {
             rdbTKLink.setAttribute('id','rdb-inverse');
             document.getElementById("rdb-footer-right").appendChild(rdbTKLink);
         }
+        */
 
         /**
          * Setting new script tag attributes to pull Typekits libraries
