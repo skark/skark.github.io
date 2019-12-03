@@ -591,14 +591,13 @@ var readability = {
                 try {
                     dbg("Caught typekit");
                     Typekit.load();
-                    clearInterval(window.typekitInterval);
                 } catch(e) {
                     dbg("Typekit error: " + e);
                 }
             }
         };
 
-        window.typekitInterval = window.setInterval(typekitLoader, 100);
+        window.typekitInterval = window.setTimeout(typekitLoader, 1000);
     },
 
     /**
