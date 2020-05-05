@@ -65,7 +65,7 @@ a.rdbTK-powered span{display:inline-block;height:22px;margin-left:2px;background
 .style-terminal {font-family:"Lucida Console", Monaco, monospace;background:#1d4e2c;color:#c6ffc6;}
 .style-terminal #readInner a {color:#093;}
 /* Typekit */
-.style-apertura{font-family:apertura-1,apertura-2,sans-serif;background-color:#2d2828;color:#eae8e9;}
+.style-apertura{font-family:apertura-1,apertura-2,sans-serif;background-color:#000000;color:#eae8e9;}
 .style-apertura #readInner a{color:#58b0ff;}
 .style-athelas{font-family:athelas-1,athelas-2,"Palatino Linotype","Book Antiqua",Palatino,serif;background-color:#f7f7f7;color:#2b373d;}
 .style-athelas #readInner a{color:#1e83cb;}
