@@ -1804,7 +1804,7 @@ var readability = {
                     linkObj.score -= 10;
                 }
                 else {
-                    dbg("++score");
+                    dbg("++score:"+linkTextAsNumber);
                     // Todo: Describe this better
                     linkObj.score += Math.max(0, 10 - linkTextAsNumber);
                 }
