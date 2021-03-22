@@ -1769,8 +1769,8 @@ var readability = {
             }
 
             if (linkHref.match(/chapter-/i)) {
-                dbg("4:+25");
-                linkObj.score += 25;
+                dbg("+40");
+                linkObj.score += 40;
             }
 
             /**
