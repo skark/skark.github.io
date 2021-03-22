@@ -1721,21 +1721,26 @@ var readability = {
 
             var linkData = linkText + ' ' + link.className + ' ' + link.id;
             if(linkData.match(readability.regexps.nextLink)) {
+            	dbg("+50");
                 linkObj.score += 50;
             }
             if(linkData.match(/pag(e|ing|inat)/i)) {
+            	dbg("+25");
                 linkObj.score += 25;
             }
             if(linkData.match(/(first|last)/i)) { // -65 is enough to negate any bonuses gotten from a > or » in the text,
                 /* If we already matched on "next", last is probably fine. If we didn't, then it's bad. Penalize. */
                 if(!linkObj.linkText.match(readability.regexps.nextLink)) {
+                    dbg("-65");
                     linkObj.score -= 65;
                 }
             }
             if(linkData.match(readability.regexps.negative) || linkData.match(readability.regexps.extraneous)) {
+                dbg("-50");
                 linkObj.score -= 50;
             }
             if(linkData.match(readability.regexps.prevLink)) {
+                dbg("-200");
                 linkObj.score -= 200;
             }
 
@@ -1747,11 +1752,13 @@ var readability = {
                 var parentNodeClassAndId = parentNode.className + ' ' + parentNode.id;
                 if(!positiveNodeMatch && parentNodeClassAndId && parentNodeClassAndId.match(/pag(e|ing|inat)/i)) {
                     positiveNodeMatch = true;
+                    dbg("2:+25");
                     linkObj.score += 25;
                 }
                 if(!negativeNodeMatch && parentNodeClassAndId && parentNodeClassAndId.match(readability.regexps.negative)) {
                     /* If this is just something like "footer", give it a negative. If it's something like "body-and-footer", leave it be. */
                     if(!parentNodeClassAndId.match(readability.regexps.positive)) {
+                    	dbg("2:-25");
                         linkObj.score -= 25;
                         negativeNodeMatch = true;
                     }
@@ -1765,11 +1772,13 @@ var readability = {
              * Things like /page/2/, /pagenum/2, ?p=3, ?page=11, ?pagination=34
             **/
             if (linkHref.match(/p(a|g|ag)?(e|ing|ination)?(=|\/)[0-9]{1,2}/i) || linkHref.match(/(page|paging)/i)) {
+            	dbg("3:+25");
                 linkObj.score += 25;
             }
 
             /* If the URL contains negative values, give a slight decrease. */
             if (linkHref.match(readability.regexps.extraneous)) {
+            	dbg("-15");
                 linkObj.score -= 15;
             }
 
@@ -1791,13 +1800,16 @@ var readability = {
             if(linkTextAsNumber) {
                 // Punish 1 since we're either already there, or it's probably before what we want anyways.
                 if (linkTextAsNumber === 1) {
+                    dbg("-10");
                     linkObj.score -= 10;
                 }
                 else {
+                    dbg("++score");
                     // Todo: Describe this better
                     linkObj.score += Math.max(0, 10 - linkTextAsNumber);
                 }
             }
+            dbg("score: " + linkObj.score);
         }
 
         /**
