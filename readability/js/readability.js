@@ -1672,14 +1672,19 @@ var readability = {
         for(var i = 0, il = allLinks.length; i < il; i+=1) {
             var link     = allLinks[i],
                 linkHref = allLinks[i].href.replace(/#.*$/, '').replace(/\/$/, '');
+                
+            dbg(link.href);
+            dbg(linkHref);
 
             /* If we've already seen this page, ignore it */
             if(linkHref === "" || linkHref === articleBaseUrl || linkHref === window.location.href || linkHref in readability.parsedPages) {
+            	dbg("already seen");
                 continue;
             }
 
             /* If it's on a different domain, skip it. */
             if(window.location.host !== linkHref.split(/\/+/g)[1]) {
+            	dbg("different domain");
                 continue;
             }
 
@@ -1687,12 +1692,14 @@ var readability = {
 
             /* If the linkText looks like it's not the next page, skip it. */
             if(linkText.match(readability.regexps.extraneous) || linkText.length > 25) {
+            	dbg("looks like it's not the next page");
                 continue;
             }
 
             /* If the leftovers of the URL after removing the base URL don't contain any digits, it's certainly not a next page link. */
             var linkHrefLeftover = linkHref.replace(articleBaseUrl, '');
             if(!linkHrefLeftover.match(/\d/)) {
+            	dbg("leftovers of the URL after removing the base URL don't contain any digits");
                 continue;
             }
 
