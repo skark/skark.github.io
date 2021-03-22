@@ -1781,6 +1781,11 @@ var readability = {
             	dbg("-15");
                 linkObj.score -= 15;
             }
+            
+            if (linkHref.match(/chapter-/i)) {
+            	dbg("4:+25");
+                linkObj.score += 25;
+            }            
 
             /**
              * Minor punishment to anything that doesn't match our current URL.
