@@ -1059,7 +1059,7 @@ var readability = {
          * Setting new script tag attributes to pull Typekits libraries
         **/
         rdbTKScript.setAttribute('type','text/javascript');
-        rdbTKScript.setAttribute('src',"http://use.typekit.com/" + rdbTKCode + ".js");
+        rdbTKScript.setAttribute('src',"//use.typekit.com/" + rdbTKCode + ".js");
         rdbTKScript.setAttribute('charset','UTF-8');
         rdbHead.appendChild(rdbTKScript);
 
