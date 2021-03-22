@@ -661,7 +661,7 @@ var readability = {
             NProgress.start();
             window.setTimeout(function() {
                 readability.appendNextPage(nextPageLink);
-            }, 500);
+            }, 1500);
         }
 
         /** Smooth scrolling **/
@@ -1992,7 +1992,7 @@ var readability = {
                     **/
                     window.setTimeout(
                         function() { readability.postProcessContent(thisPage); },
-                        500
+                        1500
                     );
 
                     if(nextPageLink) {
