@@ -1800,6 +1800,12 @@ var readability = {
                     linkObj.score += Math.max(0, 10 - linkTextAsNumber);
                 }
             }
+            
+            if (readability.getInnerText(link.nextSibling).includes("Next Part"))
+            {
+            	linkObj.score += 50;
+            }
+            
             dbg("score: " + linkObj.score);
         }
 
