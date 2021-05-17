@@ -516,7 +516,7 @@ var readability = {
     FLAG_WEIGHT_CLASSES: 0x2,
     FLAG_CLEAN_CONDITIONALLY: 0x4,
 
-    maxPages: 30, /* The maximum number of pages to loop through before we call it quits and just show a link. */
+    maxPages: 300, /* The maximum number of pages to loop through before we call it quits and just show a link. */
     parsedPages: {}, /* The list of pages we've parsed in this call of readability, for autopaging. As a key store for easier searching. */
     pageETags: {}, /* A list of the ETag headers of pages we've parsed, in case they happen to match, we'll know it's a duplicate. */
 
