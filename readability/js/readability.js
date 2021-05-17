@@ -1801,9 +1801,16 @@ var readability = {
                 }
             }
             
-            if (readability.getInnerText(link.nextSibling).includes("Next Part"))
+            
+            if (link.nextSibling)
             {
-            	linkObj.score += 50;
+            	if (link.nextSibling.nodeName != 'a')
+            	{
+		    if (readability.getInnerText(link.nextSibling).includes("Next Part"))
+		    {
+			linkObj.score += 50;
+		    }
+		}
             }
             
             dbg("score: " + linkObj.score);
