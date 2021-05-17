@@ -1677,7 +1677,7 @@ var readability = {
             var linkText = readability.getInnerText(link);
 
             /* If the linkText looks like it's not the next page, skip it. */
-            if (linkText.match(readability.regexps.extraneous) || linkText.length > 25) {
+            if (linkText.match(readability.regexps.extraneous) || linkText.length > 50) {
                 dbg("looks like it's not the next page");
                 continue;
             }
