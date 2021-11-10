@@ -10,6 +10,7 @@
             <input type="button" onclick="encode()" value="URL Encode">
             <input type="button" onclick="bdecode()" value="Base64 Decode">
             <input type="button" onclick="bencode()" value="Base64 Encode">
+            <input type="button" onclick="oclean()" value="O365 Link Cleanup">
         </div>
     </form>
     <script type="text/javascript">
@@ -50,6 +51,16 @@
         function bencode() {
             obj.value = btoa(toBinary(obj.value));
         }
+        function oclean() {
+            var url_parts = obj.value.split("?")[1];
+            var params = url_parts.split("&");
+            for(n=0;n<params.length;n++)
+	    {
+	        namval = params[n].split("=");
+	        if(namval[0]=="url") target_url = namval[1];
+	    }
+	    obj.value = decodeURIComponent(target_url);
+        }        
     </script>
 </body>
 </html>
