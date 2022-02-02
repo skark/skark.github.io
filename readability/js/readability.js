@@ -1772,6 +1772,11 @@ var readability = {
                 dbg("+40");
                 linkObj.score += 40;
             }
+            
+            if (linkHref.match(/memberpage/i)) {
+                dbg("memberpage:-80");
+                linkObj.score -= 80;
+            }            
 
             /**
              * Minor punishment to anything that doesn't match our current URL.
@@ -1832,7 +1837,7 @@ var readability = {
         if (topPage) {
             var nextHref = topPage.href.replace(/\/$/, '');
 
-            dbg('NEXT PAGE IS ' + nextHref);
+            dbg('NEXT PAGE IS ' + nextHref + ' ' + topPage.score);
             readability.parsedPages[nextHref] = true;
             return nextHref;
         }
