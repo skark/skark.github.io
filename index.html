@@ -1,66 +1,92 @@
-<html><head><meta name='robots' content='noindex, nofollow'></head>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name='robots' content='noindex, nofollow'>
+<style type="text/css">
+.table-div{display:table}
+.tr-div{display:table-row}
+.td-div{display:table-cell}
+</style>
+</head>
 <body>
     <a href="javascript:(function(){readConvertLinksToFootnotes=false;readStyle='style-apertura';readSize='size-x-large';readMargin='margin-x-narrow';_readability_script=document.createElement('script');_readability_script.type='text/javascript';_readability_script.src='https://skark.github.io/readability/js/readability.js';document.documentElement.appendChild(_readability_script);_readability_css=document.createElement('link');_readability_css.rel='stylesheet';_readability_css.href='https://skark.github.io/readability/css/readability.css?1';_readability_css.type='text/css';_readability_css.media='all';document.documentElement.appendChild(_readability_css);_readability_print_css=document.createElement('link');_readability_print_css.rel='stylesheet';_readability_print_css.href='https://skark.github.io/readability/css/readability-print.css';_readability_print_css.media='print';_readability_print_css.type='text/css';document.getElementsByTagName('head')[0].appendChild(_readability_print_css);})();">Readability</a>
     <form onsubmit="return false;">
-        <h1>Decoder/Encoder</h1>
-
-        <textarea cols="100" rows="20" id="dencoder"></textarea>
-        <div>
-            <input type="button" onclick="decode()" value="URL Decode">
-            <input type="button" onclick="encode()" value="URL Encode">
-            <input type="button" onclick="bdecode()" value="Base64 Decode">
-            <input type="button" onclick="bencode()" value="Base64 Encode">
-            <input type="button" onclick="oclean()" value="O365 Link Cleanup">
-        </div>
+	<h1>Decoder/Encoder</h1>
+	<textarea cols="100" rows="20" id="dencoder"></textarea>
+	<div class="table-div">
+		<div class="tr-div">
+			<div class="td-div"><input type="button" onclick="oclean()" value="O365 Link Cleanup" /></div>
+			<div class="td-div"><input type="button" onclick="removeDiacritics()" value="Remove Diacritics" /></div>
+		</div>
+		<div class="tr-div">
+			<div class="td-div"><input type="button" onclick="decode()" value="URL Decode" /></div>
+			<div class="td-div"><input type="button" onclick="encode()" value="URL Encode" /></div>
+		</div>
+		<div class="tr-div">
+			<div class="td-div"><input type="button" onclick="bdecode()" value="Base64 Decode" /></div>
+			<div class="td-div"><input type="button" onclick="bencode()" value="Base64 Encode" /></div>
+		</div>
+	</div>
     </form>
     <script type="text/javascript">
-        var obj = document.getElementById('dencoder');
-        function encode() {
-            obj.value = encodeURIComponent(obj.value).replace(/'/g, "%27").replace(/"/g, "%22");
-        }
-        function decode() {
-            obj.value = decodeURIComponent(obj.value.replace(/\+/g, " "));
-        }
-        function toBinary(string) {
-            const codeUnits = new Uint16Array(string.length);
-            for (let i = 0; i < codeUnits.length; i++) {
-                codeUnits[i] = string.charCodeAt(i);
-            }
-            const charCodes = new Uint8Array(codeUnits.buffer);
-            let result = '';
-            for (let i = 0; i < charCodes.byteLength; i++) {
-                result += String.fromCharCode(charCodes[i]);
-            }
-            return result;
-        }
-        function fromBinary(binary) {
-            const bytes = new Uint8Array(binary.length);
-            for (let i = 0; i < bytes.length; i++) {
-                bytes[i] = binary.charCodeAt(i);
-            }
-            const charCodes = new Uint16Array(bytes.buffer);
-            let result = '';
-            for (let i = 0; i < charCodes.length; i++) {
-                result += String.fromCharCode(charCodes[i]);
-            }
-            return result;
-        }
-        function bdecode() {
-            obj.value = fromBinary(atob(obj.value));
-        }
-        function bencode() {
-            obj.value = btoa(toBinary(obj.value));
-        }
-        function oclean() {
-            var url_parts = obj.value.split("?")[1];
-            var params = url_parts.split("&");
-            for(n=0;n<params.length;n++)
-	    {
-	        namval = params[n].split("=");
-	        if(namval[0]=="url") target_url = namval[1];
-	    }
-	    obj.value = decodeURIComponent(target_url);
-        }        
+		var obj = document.getElementById('dencoder');
+
+		function encode() {
+			obj.value = encodeURIComponent(obj.value).replace(/'/g, "%27").replace(/"/g, "%22");
+		}
+
+		function decode() {
+			obj.value = decodeURIComponent(obj.value.replace(/\+/g, " "));
+		}
+
+		function removeDiacritics() {
+			obj.value = obj.value.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+		}
+
+		function toBinary(string) {
+			const codeUnits = new Uint16Array(string.length);
+			for (let i = 0; i < codeUnits.length; i++) {
+				codeUnits[i] = string.charCodeAt(i);
+			}
+			const charCodes = new Uint8Array(codeUnits.buffer);
+			let result = '';
+			for (let i = 0; i < charCodes.byteLength; i++) {
+				result += String.fromCharCode(charCodes[i]);
+			}
+			return result;
+		}
+
+		function fromBinary(binary) {
+			const bytes = new Uint8Array(binary.length);
+			for (let i = 0; i < bytes.length; i++) {
+				bytes[i] = binary.charCodeAt(i);
+			}
+			const charCodes = new Uint16Array(bytes.buffer);
+			let result = '';
+			for (let i = 0; i < charCodes.length; i++) {
+				result += String.fromCharCode(charCodes[i]);
+			}
+			return result;
+		}
+
+		function bdecode() {
+			obj.value = fromBinary(atob(obj.value));
+		}
+
+		function bencode() {
+			obj.value = btoa(toBinary(obj.value));
+		}
+
+		function oclean() {
+			var url_parts = obj.value.split("?")[1];
+			if (!url_parts) return
+			var params = url_parts.split("&");
+			for (n = 0; n < params.length; n++) {
+				namval = params[n].split("=");
+				if (namval[0] == "url") target_url = namval[1];
+			}
+			obj.value = decodeURIComponent(target_url);
+		}
     </script>
 </body>
 </html>
